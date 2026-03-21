@@ -1,0 +1,28 @@
+/* src/css/custom.css */
+
+/* 亮色模式下的黃色系 */
+:root {
+  --ifm-color-primary: #eab308;
+  --ifm-color-primary-dark: #d3a107;
+  --ifm-color-primary-darker: #c79807;
+  --ifm-color-primary-darkest: #a47d06;
+  --ifm-color-primary-light: #ebba20;
+  --ifm-color-primary-lighter: #ecbe2c;
+  --ifm-color-primary-lightest: #f0c950;
+
+  /* 稍微調整亮色模式下的程式碼區塊背景，讓它與黃色更搭 */
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* 暗色模式下的黃色系（稍微調亮以確保在黑底上的閱讀性） */
+[data-theme='dark'] {
+  --ifm-color-primary: #facc15;
+  --ifm-color-primary-dark: #e1b813;
+  --ifm-color-primary-darker: #d5ae12;
+  --ifm-color-primary-darkest: #af8f0f;
+  --ifm-color-primary-light: #fbd12d;
+  --ifm-color-primary-lighter: #fbd438;
+  --ifm-color-primary-lightest: #fcdd5b;
+
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
