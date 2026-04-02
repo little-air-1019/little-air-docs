@@ -81,9 +81,9 @@ const config: Config = {
         src: 'img/logo.svg',
       },
       items: [
+        { type: 'docSidebar', sidebarId: 'bulletinSidebar', position: 'left', label: 'Bulletin' },
         { type: 'docSidebar', sidebarId: 'offJtSidebar', position: 'left', label: 'Off-JT' },
         { type: 'docSidebar', sidebarId: 'devSidebar', position: 'left', label: 'Dev' },
-        { type: 'docSidebar', sidebarId: 'bulletinSidebar', position: 'left', label: 'Bulletin' },
         { href: 'https://github.com/facebook/docusaurus', label: 'GitHub', position: 'right' },
       ],
     },
@@ -94,6 +94,10 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
+              label: 'Bulletin',
+              to: '/docs/bulletin',
+            },
+            {
               label: 'Off-JT',
               to: '/docs/off-jt',
             },
@@ -101,26 +105,18 @@ const config: Config = {
               label: 'Dev',
               to: '/docs/dev ',
             },
-            {
-              label: 'Bulletin',
-              to: '/docs/bulletin',
-            },
           ],
         },
         {
           title: 'Community',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'Placeholder Global',
+              href: 'https://nmixx.jype.com/Default',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
+              label: 'Placeholder Japan',
+              href: 'https://nswerjapan.com/s/222/?ima=3838',
             },
           ],
         },
@@ -133,7 +129,7 @@ const config: Config = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/little-air-1019',
             },
           ],
         },
