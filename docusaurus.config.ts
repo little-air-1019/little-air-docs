@@ -83,6 +83,7 @@ const config: Config = {
       items: [
         { type: 'docSidebar', sidebarId: 'offJtSidebar', position: 'left', label: 'Off-JT' },
         { type: 'docSidebar', sidebarId: 'devSidebar', position: 'left', label: 'Dev' },
+        { type: 'docSidebar', sidebarId: 'bulletinSidebar', position: 'left', label: 'Bulletin' },
         { href: 'https://github.com/facebook/docusaurus', label: 'GitHub', position: 'right' },
       ],
     },
@@ -99,6 +100,10 @@ const config: Config = {
             {
               label: 'Dev',
               to: '/docs/dev ',
+            },
+            {
+              label: 'Bulletin',
+              to: '/docs/bulletin',
             },
           ],
         },
