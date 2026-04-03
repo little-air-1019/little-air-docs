@@ -84,6 +84,7 @@ const config: Config = {
         { type: 'docSidebar', sidebarId: 'bulletinSidebar', position: 'left', label: 'Bulletin' },
         { type: 'docSidebar', sidebarId: 'offJtSidebar', position: 'left', label: 'Off-JT' },
         { type: 'docSidebar', sidebarId: 'devSidebar', position: 'left', label: 'Dev' },
+        { type: 'docSidebar', sidebarId: 'notesSidebar', position: 'left', label: 'Notes' },
         { href: 'https://github.com/facebook/docusaurus', label: 'GitHub', position: 'right' },
       ],
     },
