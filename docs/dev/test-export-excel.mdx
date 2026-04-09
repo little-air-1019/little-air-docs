@@ -1,0 +1,399 @@
+# Excel 測試工具
+
+> Base64 轉 Excel 下載 ／ Excel/CSV 轉 Base64
+
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+export const ExcelTool = () => {
+  const html = `<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excel 測試工具</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fffde7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 16px;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: #f9a825;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 36px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(249, 168, 37, 0.15);
+      padding: 32px;
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 24px;
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      color: #f9a825;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card h2 .icon {
+      font-size: 1.3rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 6px;
+    }
+
+    textarea {
+      width: 100%;
+      border: 1.5px solid #ffe082;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 0.85rem;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s;
+      background: #fffde7;
+      color: #333;
+    }
+
+    textarea:focus {
+      border-color: #f9a825;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding: 10px 24px;
+      background: #f9a825;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn:hover {
+      background: #fb8c00;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .divider {
+      border: none;
+      border-top: 1.5px solid #ffe082;
+      margin: 20px 0;
+    }
+
+    .file-drop {
+      border: 2px dashed #ffe082;
+      border-radius: 10px;
+      padding: 28px;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      background: #fffde7;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    .file-drop:hover,
+    .file-drop.dragover {
+      background: #fff8e1;
+      border-color: #f9a825;
+      color: #f9a825;
+    }
+
+    .file-drop input[type="file"] {
+      display: none;
+    }
+
+    #fileLabel {
+      display: block;
+      margin-top: 8px;
+      font-size: 0.82rem;
+      color: #f9a825;
+      min-height: 18px;
+    }
+
+    #base64Output {
+      background: #fffde7;
+    }
+
+    .copy-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .copy-row textarea {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 0.82rem;
+      margin-top: 0;
+      white-space: nowrap;
+      align-self: flex-start;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #333;
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 24px;
+      font-size: 0.88rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .format-row {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .format-label {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    .seg {
+      display: inline-flex;
+      border: 1.5px solid #ffe082;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .seg-btn {
+      padding: 6px 16px;
+      background: #fff;
+      border: none;
+      font-size: 0.82rem;
+      color: #666;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      border-right: 1.5px solid #ffe082;
+    }
+
+    .seg-btn:last-child {
+      border-right: none;
+    }
+
+    .seg-btn.active {
+      background: #f9a825;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .seg-btn:not(.active):hover {
+      background: #fff8e1;
+      color: #f9a825;
+    }
+  </style>
+</head>
+<body>
+  <h1>📊 Excel 測試工具</h1>
+  <p class="subtitle">Base64 轉 Excel 下載 ／ Excel/CSV 轉 Base64</p>
+
+  <!-- Section 1: Base64 → Download -->
+  <div class="card">
+    <h2>Base64 → 下載檔案</h2>
+    <label for="base64Input">貼上 Base64 字串：</label>
+    <textarea id="base64Input" rows="5" placeholder="貼上由後端給的 base64 資料"></textarea>
+    <div class="format-row">
+      <label for="formatSelect" class="format-label">下載格式：</label>
+      <div class="seg" id="formatSeg">
+        <button class="seg-btn active" data-fmt="xlsx">Excel (.xlsx)</button>
+        <button class="seg-btn" data-fmt="csv">CSV (.csv)</button>
+      </div>
+    </div>
+    <button class="btn btn-sm" id="downloadBtn">下載</button>
+  </div>
+
+  <!-- Section 2: File → Base64 -->
+  <div class="card">
+    <h2>Excel / CSV → Base64</h2>
+    <div class="file-drop" id="dropZone">
+      <label for="fileInput">
+        📂 點擊選擇或拖曳檔案至此<br>
+        <small>支援 .xlsx、.xls、.csv</small>
+        <input type="file" id="fileInput" accept=".xlsx,.xls,.csv">
+      </label>
+    </div>
+    <span id="fileLabel"></span>
+
+    <hr class="divider">
+
+    <label for="base64Output">Base64 結果：</label>
+    <div class="copy-row">
+      <textarea id="base64Output" rows="5" placeholder="Base64 字串將顯示於此" readonly></textarea>
+      <button class="btn btn-sm" id="copyBtn">複製</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ── Section 1: Base64 → Download ──────────────────────────────
+    let selectedFmt = 'xlsx';
+
+    document.querySelectorAll('.seg-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedFmt = btn.dataset.fmt;
+      });
+    });
+
+    document.getElementById('downloadBtn').addEventListener('click', function () {
+      const base64Data = document.getElementById('base64Input').value.trim();
+      if (!base64Data) { showToast('請輸入 base64 資料！'); return; }
+      try {
+        const byteCharacters = atob(base64Data);
+        const byteArray = new Uint8Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteArray[i] = byteCharacters.charCodeAt(i);
+        }
+        const mimeMap = {
+          xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          csv: 'text/csv'
+        };
+        const blob = new Blob([byteArray], { type: mimeMap[selectedFmt] });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'output.' + selectedFmt;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        showToast('下載已開始 ✅');
+      } catch (e) {
+        showToast('Base64 資料無效，請確認是否正確！');
+      }
+    });
+
+    // ── Section 2: File → Base64 ──────────────────────────────────
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const fileLabel = document.getElementById('fileLabel');
+    const base64Output = document.getElementById('base64Output');
+
+    fileInput.addEventListener('change', () => handleFile(fileInput.files[0]));
+
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      const file = e.dataTransfer.files[0];
+      if (file) handleFile(file);
+    });
+
+    function handleFile(file) {
+      if (!file) return;
+      const allowed = ['.xlsx', '.xls', '.csv'];
+      const ext = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
+      if (!allowed.includes(ext)) { showToast('僅支援 .xlsx、.xls、.csv 格式'); return; }
+
+      fileLabel.textContent = '📄 ' + file.name + ' (' + (file.size / 1024).toFixed(1) + ' KB)';
+      const reader = new FileReader();
+      reader.onload = e => {
+        const base64 = e.target.result.split(',')[1];
+        base64Output.value = base64;
+        showToast('轉換完成 ✅');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    document.getElementById('copyBtn').addEventListener('click', () => {
+      const val = base64Output.value;
+      if (!val) { showToast('尚無內容可複製'); return; }
+      navigator.clipboard.writeText(val).then(() => showToast('已複製到剪貼簿 ✅'));
+    });
+
+    // ── Toast helper ──────────────────────────────────────────────
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+  </script>
+</body>
+</html>`;
+  return (
+    <iframe
+      srcDoc={html}
+      style={{
+        width: '100%',
+        height: '820px',
+        border: '1px solid #e0e0e0',
+        borderRadius: '12px',
+        overflow: 'hidden',
+      }}
+      title="Excel 測試工具"
+      sandbox="allow-scripts allow-downloads allow-same-origin"
+    />
+  );
+};
+
+<BrowserOnly>
+  {() => <ExcelTool />}
+</BrowserOnly>

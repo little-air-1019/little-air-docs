@@ -1,9 +1,9 @@
 ---
-sidebar_position: 3
-title: GIT
+sidebar_position: 1
+title: Git
 ---
 
-# GIT Notes
+# Git
 
 記錄 Git 的各項操作技巧與常見工作流。
 

@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
-title: Dev 總覽
+title: Dev
 ---
 
 # Dev
 
-開發相關技術筆記
+小工具倉庫
