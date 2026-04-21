@@ -32,7 +32,13 @@
 .subtitle {
   font-size: 0.9rem;
   color: var(--ifm-color-emphasis-600);
-  margin-bottom: 1.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.hint {
+  font-size: 0.75rem;
+  color: var(--ifm-color-emphasis-500);
+  margin: 0 0 1.75rem;
 }
 
 .form {

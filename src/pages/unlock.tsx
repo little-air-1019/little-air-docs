@@ -49,6 +49,7 @@ export default function UnlockPage(): React.ReactElement {
           <div className={styles.lockIcon}>🔒</div>
           <h2 className={styles.title}>Private Notes</h2>
           <p className={styles.subtitle}>請輸入密碼以進入筆記區域</p>
+          <p className={styles.hint}>密碼：梁山麻醉槍</p>
           <form onSubmit={handleSubmit} className={styles.form}>
             <input
               type="password"

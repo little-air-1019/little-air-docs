@@ -48,7 +48,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/little-air-1019',
         },
         blog: {
           showReadingTime: true,
@@ -59,7 +59,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/little-air-1019',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -89,7 +89,7 @@ const config: Config = {
         { type: 'docSidebar', sidebarId: 'offJtSidebar', position: 'left', label: 'Off-JT' },
         { type: 'docSidebar', sidebarId: 'devSidebar', position: 'left', label: 'Dev' },
         { type: 'docSidebar', sidebarId: 'notesSidebar', position: 'left', label: 'Notes' },
-        { href: 'https://github.com/facebook/docusaurus', label: 'GitHub', position: 'right' },
+        { href: 'https://github.com/little-air-1019', label: 'GitHub', position: 'right' },
       ],
     },
     footer: {
